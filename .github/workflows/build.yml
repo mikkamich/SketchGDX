@@ -1,7 +1,7 @@
 name: Build APK
 
 on:
-  workflow_dispatch:
+  push:
 
 jobs:
   build:
@@ -18,14 +18,11 @@ jobs:
           java-version: '17'
           cache: gradle
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
       - name: Grant execute permission
         run: chmod +x gradlew
 
       - name: Build APK
-        run: ./gradlew :app:assembleMinApi21Debug
+        run: ./gradlew :app:assembleMinApi21Debug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
