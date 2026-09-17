@@ -22,7 +22,13 @@ jobs:
         distribution: 'temurin'
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
+      with:
+        # Явно указываем актуальные пакеты, исключая устаревший 'tools'
+        packages: 'platform-tools cmdline-tools;16.0 platforms;android-35 build-tools;35.0.0'
+        # Отключаем автоматическую установку пакетов по умолчанию
+        # (опционально, но дает больше контроля)
+        # accept-android-sdk-licenses: 'yes'
 
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
